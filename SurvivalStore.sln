@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurvivalStore.UI.MVC", "SurvivalStore.UI.MVC\SurvivalStore.UI.MVC.csproj", "{C1D3B3BA-E807-45D1-B3EE-A5EC237BBD64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuvivalStore.DATA.EF", "SuvivalStore.DATA.EF\SuvivalStore.DATA.EF.csproj", "{7F474974-D8B4-4E58-8FFE-95E9E249E211}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1D3B3BA-E807-45D1-B3EE-A5EC237BBD64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D3B3BA-E807-45D1-B3EE-A5EC237BBD64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D3B3BA-E807-45D1-B3EE-A5EC237BBD64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D3B3BA-E807-45D1-B3EE-A5EC237BBD64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F474974-D8B4-4E58-8FFE-95E9E249E211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F474974-D8B4-4E58-8FFE-95E9E249E211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F474974-D8B4-4E58-8FFE-95E9E249E211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F474974-D8B4-4E58-8FFE-95E9E249E211}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECA9F57C-2747-4A0D-90BA-C311512B04B7}
+	EndGlobalSection
+EndGlobal
