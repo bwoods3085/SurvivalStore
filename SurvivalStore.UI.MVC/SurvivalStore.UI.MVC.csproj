@@ -35,4 +35,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SuvivalStore.DATA.EF\SuvivalStore.DATA.EF.csproj" />
+  </ItemGroup>
+
 </Project>
