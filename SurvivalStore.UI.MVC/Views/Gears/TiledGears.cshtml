@@ -1,0 +1,157 @@
+﻿@*@model IEnumerable<GadgetStore.DATA.EF.Models.Product>*@
+
+@*
+    To utilize X.PagedList, we will need to updat the model
+    declaration for this View, as well as adding using statements
+*@
+
+@model IPagedList<SurvivalStore.DATA.EF.Models.Gear>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+@{
+    ViewData["Title"] = "Shop Gear";
+}
+
+
+
+<!-- product section -->
+<section class="product_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Shop <span>Gear</span>
+            </h2>
+        </div>
+
+        <p align="center">
+            @if (User.IsInRole("Admin"))
+            {
+                <span>
+                    <a asp-action="Create">Add New Product</a> |
+                    @*<a asp-action="Discontinued">Discontinued Gadgets</a> |*@
+                </span>
+            }
+            <a asp-action="Index">Table View</a>
+        </p>
+
+        <div class="row">
+
+            @*
+                Implementing Search:
+                    - Add a <form>
+                    - Add an <input> textbox
+                    - Add an <input> submit
+                    - Add an if() to display the number of results and the search term
+                    - Add search logic to the controller action
+            *@
+
+            <div class="offset-3 col-sm-6">
+                <form asp-action="TiledProducts" method="get">
+
+                    @*
+                        method="get" => Append the key value pairs from a form onto 
+                        the query string in our URL. The ? in the URL indictaes the
+                        beginning of a query string. Everything after the ? is a key/value pair.
+
+                        URL?searchTerm=WhateverIsSearchedFor
+                        - If you have multiple key value pairs, they are seperated with an &
+                            URL?searchTerm=Whatever&category=tool
+
+                        These key value pairs are passed to the action as arguemtents for 
+                        the Actions parameters -- public IActionResult TiledProducts(string searchTerm, string category)
+                    *@
+
+                    @* Categories Filter Dropdown*@
+                    <label for="categoryId" class="custom-control-label d-block text-center">Filter by Category</label>
+                    <select name="categoryId" class="form-control text-center mb-3" asp-items="ViewBag.CategoryId">
+                        <option value="0">[Choose a Category]</option>
+                    </select>
+
+
+                    @*Inputs for Search*@
+                    <input name="searchTerm" class="form-control" placeholder="Search Products.." />
+                    <input type="submit" value="Go" class="btn btn-primary text-center w-50 d-block" />
+                </form>
+
+                @if (ViewBag.NbrResults != null)
+                {
+                    <p class="mt-5 p-2 alert-warning text-center">
+                        Showing @ViewBag.NbrResults result@(ViewBag.NbrResults > 1 ? "s" : "") for '@ViewBag.SearchTerm'...
+                    </p>    
+                }
+
+            </div>
+
+
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="box">
+                        <div class="option_container">
+                            <div class="options">
+
+                                @*Update the links below for use with Shopping Cart*@
+
+                                @*<a href="" class="option1">
+                            @item.ProductName
+                            </a>*@
+
+                                <a asp-action="Details" asp-route-id="@item.GearId" class="option1">
+                                    @item.GearName
+                                </a>
+
+                                @*<a href="" class="option2">
+                            Add To Cart
+                            </a>*@
+
+                                <a asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-id="@item.GearId" class="option2">
+                                    Add to Cart
+                                </a>
+
+
+                            </div>
+                        </div>
+                        <div class="img-box">
+                            <img src="~/images/@item.GearImage" alt="@item.GearDescription">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                @item.GearName
+                            </h5>
+                            <h6>
+                                @Html.DisplayFor(modelItem => item.GearPrice)
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+
+        @*<div class="btn-box">
+            <a href="">
+                View All products
+            </a>
+        </div>*@
+
+        @* Paged List Counter / Pager *@
+
+        <div class="row mt-5">
+            <div class="w-50 mx-auto text-center">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                <div class="w-100">
+                    @Html.PagedListPager(
+                        Model,
+                        page => Url.Action("TiledProducts", 
+                        new {page, searchTerm = ViewBag.SearchTerm, categoryId = ViewBag.Category})
+                    )
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- end product section -->
